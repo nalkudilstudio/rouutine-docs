@@ -1,331 +1,651 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Rouutine — Getting Started | Nalkudil Studio</title><link rel="icon" type="image/svg+xml" href="favicon.svg"/><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/><style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started — Rouutine App | Nalkudil Studio</title>
+  <meta name="description" content="Everything you need to know to get started with Rouutine — daily routines, 11 creature companions, streak tracking, and gentle nudges." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --teal:  #1DBFB0; --gold: #E8A83A; --navy: #0D1B2A; --navy2: #112233;
-      --card:  rgba(255,255,255,0.04); --border: rgba(255,255,255,0.07);
-      --text:  #F0F4F8; --muted: rgba(240,244,248,0.45);
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--navy); color: var(--text); font-family: 'Inter', sans-serif;
-           line-height: 1.6; min-height: 100vh; }
 
+    :root {
+      --teal:   #1DBFB0;
+      --gold:   #E8A83A;
+      --navy:   #0D1B2A;
+      --navy2:  #112233;
+      --card:   rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.07);
+      --text:   #F0F4F8;
+      --muted:  rgba(240,244,248,0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center;
-      padding: 0 40px; height: 60px;
-      background: rgba(13,27,42,0.92); backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none; flex-shrink: 0;
-    }
-    .nav-ns {
-      width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, rgba(29,191,176,0.2), rgba(232,168,58,0.1));
-      border: 1px solid rgba(29,191,176,0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chakra Petch', sans-serif; font-size: 12px; font-weight: 700;
-    }
-    .nav-ns .nn { color: var(--teal); } .nav-ns .ns { color: var(--gold); }
-    .nav-brand {
-      font-family: 'Chakra Petch', sans-serif; font-size: 14px;
-      font-weight: 700; letter-spacing: 1px; color: var(--text);
-    }
-    .nav-center {
-      display: flex; gap: 28px; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
-    }
-    .nav-center a {
-      color: var(--muted); text-decoration: none;
-      font-size: 13px; letter-spacing: 0.5px; transition: color 0.2s;
-    }
-    .nav-center a:hover { color: var(--teal); }
-    .nav-right { margin-left: auto; display: flex; gap: 20px; align-items: center; }
-    .nav-right a {
-      color: var(--muted); text-decoration: none;
-      font-size: 13px; letter-spacing: 0.3px; transition: color 0.2s;
-    }
-    .nav-right a:hover { color: var(--teal); }
-    .nav-right a.back { color: var(--teal); }
-    .nav-right a.back:hover { opacity: 0.8; }
-
-    /* hero */
-    .page-hero {
-      padding: 110px 24px 64px; text-align: center;
-      max-width: 760px; margin: 0 auto;
-      position: relative;
-    }
-    .page-hero::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 500px; height: 400px;
-      background: radial-gradient(circle, rgba(29,191,176,0.09) 0%, transparent 70%);
-      pointer-events: none; z-index: 0;
-    }
-    .page-hero > * { position: relative; z-index: 1; }
-    .app-badge {
-      display: inline-block; margin-bottom: 18px;
-      background: rgba(29,191,176,0.08); border: 1px solid rgba(29,191,176,0.25);
-      border-radius: 20px; padding: 5px 16px;
-      font-family: 'Chakra Petch', sans-serif; font-size: 11px;
-      letter-spacing: 2px; color: var(--teal); text-transform: uppercase;
-    }
-    h1 {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: clamp(28px, 5vw, 48px); font-weight: 700; line-height: 1.15;
-      margin-bottom: 16px;
+      font-size: 16px; font-weight: 700; letter-spacing: 1px;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
     }
-    h1 .teal { color: var(--teal); } h1 .gold { color: var(--gold); }
-    .hero-sub {
-      color: var(--muted); font-size: clamp(14px, 2vw, 16px);
-      max-width: 520px; margin: 0 auto 32px; line-height: 1.75;
+    .nav-monogram {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, rgba(29,191,176,0.2), rgba(232,168,58,0.1));
+      border: 1px solid rgba(29,191,176,0.3);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
     }
-    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .nav-monogram .ln { color: var(--teal); }
+    .nav-monogram .ls { color: var(--gold); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 13px;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-back {
+      font-size: 13px; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      position: relative; overflow: hidden;
+      max-width: 800px; margin: 0 auto;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(29,191,176,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(29,191,176,0.1);
+      border: 1px solid rgba(29,191,176,0.2);
+      border-radius: 100px;
+      padding: 6px 16px; margin-bottom: 24px;
+      font-size: 12px; letter-spacing: 2px;
+      font-family: 'Chakra Petch', sans-serif;
+      color: var(--teal); text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 700; line-height: 1.15; margin-bottom: 18px;
+    }
+    .hero h1 .teal { color: var(--teal); }
+    .hero p {
+      color: var(--muted); font-size: 16px;
+      max-width: 540px; margin: 0 auto 36px; line-height: 1.8;
+    }
     .btn {
-      padding: 12px 26px; border-radius: 10px; font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: all 0.2s; cursor: pointer; letter-spacing: 0.3px;
+      display: inline-block; padding: 13px 28px;
+      border-radius: 10px; font-size: 14px; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: all 0.2s;
     }
     .btn-primary { background: var(--teal); color: var(--navy); font-weight: 700; }
     .btn-primary:hover { background: #22d4c4; transform: translateY(-1px); }
-    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text); margin-left: 12px;
+    }
     .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
 
-    /* sections */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0 24px; }
-    .section-wrap { max-width: 1080px; margin: 0 auto; padding: 72px 24px; }
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 1080px; margin: 0 auto;
+      padding: 80px 24px;
+    }
     .section-label {
-      font-family: 'Chakra Petch', sans-serif; font-size: 11px;
-      letter-spacing: 4px; color: var(--teal); text-transform: uppercase; margin-bottom: 10px;
-    }
-    h2 {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: clamp(22px, 3.5vw, 32px); font-weight: 700; margin-bottom: 10px;
+      font-size: 11px; letter-spacing: 4px;
+      color: var(--teal); text-transform: uppercase;
+      margin-bottom: 10px;
     }
-    .section-sub { color: var(--muted); font-size: 15px; max-width: 480px; margin-bottom: 44px; }
+    .section h2 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700; margin-bottom: 10px;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 15px;
+      max-width: 500px; margin-bottom: 48px; line-height: 1.7;
+    }
+    hr.divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 0 24px;
+    }
 
-    /* steps */
-    .steps-grid { display: grid; gap: 16px; }
+    /* ── STEPS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
     .step-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px 32px;
-      display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
-    }
-    .step-num {
-      width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0;
-      background: rgba(29,191,176,0.08); border: 1px solid rgba(29,191,176,0.25);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chakra Petch', sans-serif; font-size: 13px;
-      font-weight: 700; color: var(--teal);
-    }
-    .step-body h3 {
-      font-family: 'Chakra Petch', sans-serif; font-size: 16px; font-weight: 700;
-      margin-bottom: 6px; color: var(--text);
-    }
-    .step-body p { color: var(--muted); font-size: 14px; margin-bottom: 14px; line-height: 1.65; }
-    .step-body ul { list-style: none; }
-    .step-body ul li {
-      font-size: 13px; color: var(--muted); padding: 4px 0 4px 18px;
-      position: relative; line-height: 1.55;
-    }
-    .step-body ul li::before {
-      content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 11px; top: 5px;
-    }
-
-    /* features grid */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;
-    }
-    .feature-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      position: relative;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .feature-card:hover { border-color: rgba(29,191,176,0.3); transform: translateY(-2px); }
-    .feature-icon { font-size: 32px; margin-bottom: 12px; }
+    .step-card:hover { border-color: rgba(29,191,176,0.3); transform: translateY(-2px); }
+    .step-num {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 48px; font-weight: 700;
+      color: var(--teal); opacity: 0.15;
+      position: absolute; top: 16px; right: 20px;
+      line-height: 1;
+    }
+    .step-icon { font-size: 32px; margin-bottom: 14px; }
+    .step-card h3 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--text); margin-bottom: 10px;
+    }
+    .step-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .step-card ul { list-style: none; margin-top: 10px; }
+    .step-card ul li {
+      color: var(--muted); font-size: 13px;
+      padding: 4px 0 4px 16px; position: relative;
+    }
+    .step-card ul li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--teal); font-size: 10px; top: 6px;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(29,191,176,0.25); transform: translateY(-2px); }
+    .feature-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    }
+    .feature-emoji { font-size: 28px; }
+    .feature-name {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 15px; font-weight: 700; color: var(--text);
+    }
     .feature-tag {
-      font-family: 'Chakra Petch', sans-serif; font-size: 10px;
-      letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--teal); text-transform: uppercase;
+      font-family: 'Chakra Petch', sans-serif;
+      opacity: 0.7;
     }
-    .feature-card h3 {
-      font-family: 'Chakra Petch', sans-serif; font-size: 15px;
-      font-weight: 700; margin-bottom: 8px; color: var(--text);
-    }
-    .feature-card p { color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .feature-card ul { list-style: none; margin-top: 10px; }
+    .feature-card p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+    .feature-card ul { list-style: none; }
     .feature-card ul li {
-      font-size: 13px; color: var(--muted); padding: 3px 0 3px 14px; position: relative;
+      color: var(--muted); font-size: 13px;
+      padding: 3px 0 3px 16px; position: relative;
     }
-    .feature-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--teal); }
+    .feature-card ul li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--teal); font-size: 10px; top: 5px;
+    }
 
-    /* faq */
-    .faq-list { display: grid; gap: 8px; }
-    details {
-      background: var(--card); border: 1px solid var(--border);
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden;
+      transition: border-color 0.2s;
     }
-    details summary {
-      padding: 16px 22px; cursor: pointer; font-weight: 600; font-size: 14px;
-      list-style: none; display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
+    .faq-item:hover { border-color: rgba(29,191,176,0.2); }
+    .faq-item[open] { border-color: rgba(29,191,176,0.25); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      padding: 20px 24px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; text-align: left; list-style: none;
     }
-    details summary::-webkit-details-marker { display: none; }
-    details summary::after { content: '+'; font-size: 18px; color: var(--teal); flex-shrink: 0; margin-left: 12px; }
-    details[open] summary::after { content: '×'; }
-    .faq-body { padding: 0 22px 16px; color: var(--muted); font-size: 14px; line-height: 1.7; }
-
-    /* privacy */
-    .pp-intro {
-      background: var(--card); border: 1px solid rgba(29,191,176,0.2);
-      border-radius: 14px; padding: 24px 28px; margin-bottom: 40px;
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q-text {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      font-family: 'Inter', sans-serif;
     }
-    .pp-intro p { color: var(--muted); font-size: 14px; line-height: 1.7; }
-    .pp-intro strong { color: var(--text); }
-    .toc-box {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 22px 28px; margin-bottom: 40px;
+    .faq-icon {
+      color: var(--teal); font-size: 22px; font-weight: 300;
+      transition: transform 0.3s; flex-shrink: 0;
+      font-family: monospace; line-height: 1;
     }
-    .toc-box h3 {
-      font-family: 'Chakra Petch', sans-serif; font-size: 11px;
-      letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
-    }
-    .toc-box ol { padding-left: 18px; }
-    .toc-box li { margin-bottom: 6px; }
-    .toc-box li a { color: var(--teal); text-decoration: none; font-size: 14px; }
-    .toc-box li a:hover { text-decoration: underline; }
-    .pp-section { margin-bottom: 48px; }
-    .pp-section-num {
-      font-family: 'Chakra Petch', sans-serif; font-size: 10px;
-      letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px;
-    }
-    .pp-section h2 {
-      font-size: clamp(16px, 2.5vw, 20px); padding-top: 20px;
-      border-top: 1px solid var(--border); margin-bottom: 16px;
-    }
-    .pp-section p, .pp-section li { color: var(--muted); font-size: 14px; line-height: 1.75; }
-    .pp-section ul, .pp-section ol { padding-left: 20px; margin-top: 10px; }
-    .pp-section li { margin-bottom: 5px; }
-    .pp-table {
-      width: 100%; border-collapse: collapse; margin-top: 16px;
-      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
-    }
-    .pp-table th {
-      font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--muted);
-      text-transform: uppercase; padding: 10px 16px;
-      background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); text-align: left;
-    }
-    .pp-table td {
-      font-size: 13px; padding: 12px 16px; border-bottom: 1px solid var(--border);
-      color: var(--muted); vertical-align: top;
-    }
-    .pp-table tr:last-child td { border-bottom: none; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .chip {
-      background: rgba(29,191,176,0.07); border: 1px solid rgba(29,191,176,0.2);
-      border-radius: 8px; padding: 6px 12px; font-size: 12px; color: var(--teal);
+    .faq-item[open] .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      padding: 0 24px 20px;
+      color: var(--muted); font-size: 14px; line-height: 1.8;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
     }
 
-    /* footer */
+    /* ── CO-CREATE CTA ── */
+    .cocreate {
+      background: linear-gradient(135deg, rgba(29,191,176,0.08), rgba(232,168,58,0.05));
+      border: 1px solid rgba(29,191,176,0.2);
+      border-radius: 20px; padding: 56px 40px;
+      text-align: center; margin: 0 auto;
+      max-width: 1032px;
+      position: relative; overflow: hidden;
+    }
+    .cocreate::before {
+      content: '';
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(29,191,176,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cocreate-label {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 11px; letter-spacing: 4px;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .cocreate h2 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700; margin-bottom: 14px;
+    }
+    .cocreate p {
+      color: var(--muted); font-size: 15px;
+      max-width: 520px; margin: 0 auto 32px; line-height: 1.8;
+    }
+    .cocreate-steps {
+      display: flex; justify-content: center; gap: 32px;
+      flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .cocreate-step {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted);
+    }
+    .cocreate-step span { color: var(--teal); font-weight: 600; }
+
+    /* ── FOOTER ── */
     footer {
-      text-align: center; padding: 48px 24px;
-      border-top: 1px solid var(--border); margin-top: 40px;
+      border-top: 1px solid var(--border);
+      padding: 40px 24px; text-align: center;
+      margin-top: 80px;
     }
     .footer-logo {
-      font-family: 'Chakra Petch', sans-serif; font-size: 18px;
-      font-weight: 700; margin-bottom: 18px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 18px; font-weight: 700; margin-bottom: 16px;
     }
     .footer-links {
-      display: flex; gap: 20px; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 18px;
+      display: flex; justify-content: center; gap: 20px;
+      flex-wrap: wrap; margin-bottom: 16px;
     }
     .footer-links a {
-      color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s;
+      color: var(--muted); font-size: 13px;
+      text-decoration: none; transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--teal); }
     .footer-copy { color: var(--muted); font-size: 12px; }
+    .footer-copy a { color: var(--teal); text-decoration: none; }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 0 16px; }
-      .nav-center { display: none; }
-      .step-card { grid-template-columns: 1fr; }
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .cocreate { padding: 36px 24px; }
     }
-</style></head><body><nav>
-  <a href="https://nalkudilstudio.github.io" class="nav-logo">
-    <div class="nav-ns"><span class="nn">N</span><span class="ns">S</span></div>
-    <span class="nav-brand">NALKUDIL STUDIO</span>
-  </a>
-  <ul class="nav-center"><li><a href="#steps">Get Started</a></li><li><a href="#features">Features</a></li><li><a href="#faq">FAQ</a></li></ul>
-  <div class="nav-right">
-    <a href="https://nalkudilstudio.github.io/rouutine-docs/privacy-policy">Privacy Policy</a>
-    <a href="https://nalkudilstudio.github.io" class="back">← Back to Studio</a>
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://nalkudilstudio.github.io" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-monogram"><span class="ln">N</span><span class="ls">S</span></div>
+      <span style="color:var(--text); font-family:'Chakra Petch',sans-serif;">NALKUDIL STUDIO</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#steps">Get Started</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cocreate">Co-Create</a></li>
+    </ul>
+    <div style="display:flex; gap:20px; align-items:center;">
+      <a href="https://nalkudilstudio.github.io/rouutine-docs/privacy-policy" class="nav-back">Privacy Policy</a>
+      <a href="https://nalkudilstudio.github.io" class="nav-back">← Back to Studio</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div style="background: radial-gradient(ellipse at 50% 0%, rgba(29,191,176,0.07) 0%, transparent 60%);">
+    <div class="hero">
+      <div class="hero-badge">🐾 Rouutine App — Getting Started</div>
+      <h1>Your Day,<br/><span class="teal">Beautifully</span> Alive</h1>
+      <p>Build daily routines with 11 unique creature companions who nudge you forward — with personality, streak tracking, and zero nag factor.</p>
+      <a href="#steps" class="btn btn-primary">Let's Begin</a>
+      <a href="#features" class="btn btn-ghost">Explore Features</a>
+    </div>
   </div>
-</nav><div class="page-hero">
-  <span class="app-badge">🐾 Rouutine</span>
-  <h1>Your Day,<br/><span class="teal">Beautifully</span> Alive</h1>
-  <p class="hero-sub">Build daily routines with 11 unique creature companions who nudge you forward — with personality, streak tracking, and zero nag factor.</p>
-  <div class="cta-row">
-    <a href="#steps" class="btn btn-primary">Let's Begin</a>
-    <a href="#features" class="btn btn-ghost">Meet the Creatures</a>
-  </div>
-</div><div class="section-wrap" id="steps"><p class="section-label">Getting Started</p><h2>Up &amp; Running in 3 Steps</h2><div class="steps-grid"><div class="step-card">
-  <div class="step-num">01</div>
-  <div class="step-body">
-    <h3>👤 Tell Us Your Name &amp; Pick a Nudge Tone</h3>
-    <p>A 3-step onboarding sets up your personal Rouutine experience — takes under a minute.</p>
-    <ul><li>Enter your first name — creatures will use it when nudging you</li><li>Pick a Nudge Tone: 🌸 Gentle, ⚡ Energetic, or 🤣 Funny</li><li>Gentle is calm and warm. Energetic is motivating. Funny is playful.</li><li>You can change your tone anytime in Settings</li><li>Allow notification permission when prompted — essential for nudges</li></ul>
-  </div>
-</div><div class="step-card">
-  <div class="step-num">02</div>
-  <div class="step-body">
-    <h3>🐾 Build Your First Routine</h3>
-    <p>Add a routine for any part of your day — morning, afternoon, or evening. Each routine gets its own creature companion.</p>
-    <ul><li>Tap the + button on the Home screen</li><li>Enter a title (e.g. 'Morning Walk', 'Study Block')</li><li>Set a time and select which days it repeats</li><li>Choose a creature — each has a suggested default routine</li><li>Save — your routine appears on the Home timeline</li></ul>
-  </div>
-</div><div class="step-card">
-  <div class="step-num">03</div>
-  <div class="step-body">
-    <h3>🔔 Get Nudged &amp; Build Your Streak</h3>
-    <p>At the scheduled time, your creature sends a notification. Complete or snooze — your streak is tracked either way.</p>
-    <ul><li>Notification arrives at the routine's scheduled time</li><li>Tap to open the full Moment screen</li><li>Tap Done — confetti flies, streak grows 🔥</li><li>Tap Snooze for a gentle reminder later</li><li>Check your streak and badges in the Progress screen</li></ul>
-  </div>
-</div></div></div><hr class="divider"/><div class="section-wrap" id="features"><p class="section-label">Feature Guide</p><h2>Know Your Tools</h2><div class="features-grid"><div class="feature-card">
-  <div class="feature-icon">🐾</div>
-  <div class="feature-tag">Core</div>
-  <h3>11 Creature Companions</h3>
-  <p>Each creature has a personality, a default routine, and a unique accent colour. Pick the creature that matches the energy of your routine.</p><ul><li>☀️ Sunny — Wake Up</li><li>🫧 Bubbles — Morning Hygiene</li><li>🍞 Crumble — Breakfast</li><li>📚 Pagey — Study / Reading</li><li>⚡ Bolt — Exercise</li><li>🌙 Luna — Sleep</li></ul>
-</div><div class="feature-card">
-  <div class="feature-icon">🔔</div>
-  <div class="feature-tag">Nudges</div>
-  <h3>3 Nudge Tones</h3>
-  <p>Your creature's personality is shaped by your Nudge Tone. Each tone has 3 unique messages per creature — 99 total nudge messages across all creatures.</p><ul><li>🌸 Gentle: soft, calm, warm encouragement</li><li>⚡ Energetic: high energy, motivating, action-oriented</li><li>🤣 Funny: playful, witty, makes you smile</li><li>Change tone anytime in Settings</li></ul>
-</div><div class="feature-card">
-  <div class="feature-icon">🔥</div>
-  <div class="feature-tag">Motivation</div>
-  <h3>Streak Tracking</h3>
-  <p>Every routine you complete adds to your daily streak. Streaks build momentum — the longer your streak, the more your creature celebrates.</p><ul><li>Streak shown prominently on the Home screen</li><li>Streak bar animates with each completion</li><li>Creature reacts differently based on streak length</li></ul>
-</div><div class="feature-card">
-  <div class="feature-icon">🏅</div>
-  <div class="feature-tag">Motivation</div>
-  <h3>Progress Badges</h3>
-  <p>Earn badges as you build consistency. Three milestone badges recognise your journey.</p><ul><li>🌱 Seedling — complete your first week</li><li>⚔️ Week Warrior — 7 consecutive days</li><li>🏆 Month Master — 30 consecutive days</li><li>Badges shown in the Progress screen</li></ul>
-</div><div class="feature-card">
-  <div class="feature-icon">🏗️</div>
-  <div class="feature-tag">Tools</div>
-  <h3>Routine Builder</h3>
-  <p>Full control over every routine — title, time, days of the week, creature, and nudge tone.</p><ul><li>Title, scheduled time, and repeat days</li><li>Per-routine creature selection</li><li>Routines sorted by time on the Home timeline</li><li>Edit or delete anytime</li></ul>
-</div><div class="feature-card">
-  <div class="feature-icon">📴</div>
-  <div class="feature-tag">Privacy</div>
-  <h3>Fully Offline</h3>
-  <p>Rouutine works completely without internet. All routines and progress stay on your device.</p><ul><li>No internet permission required</li><li>All data stored locally in Room database</li><li>No ads, no in-app purchases (base version)</li></ul>
-</div></div></div><hr class="divider"/><div class="section-wrap" id="faq"><p class="section-label">FAQ</p><h2>Common Questions</h2><div class="faq-list"><details><summary>Does Rouutine need internet?</summary><div class="faq-body">No — Rouutine is fully offline. All routines, streaks, and creature nudges work without any internet connection. Notifications use Android's local AlarmManager, not a cloud service.</div></details><details><summary>Will notifications arrive if my phone is restarted?</summary><div class="faq-body">Yes. Rouutine automatically reschedules all active routine alarms when your phone boots. Make sure to allow the app's notification and exact alarm permissions for reliable delivery.</div></details><details><summary>What happens if I miss a routine?</summary><div class="faq-body">Your streak resets if a routine is not completed on its scheduled day. You can still complete the routine manually, but missed days count as breaks in the streak.</div></details><details><summary>How many routines can I add?</summary><div class="faq-body">The free version supports up to 5 routine slots. A premium version with unlimited routines and all 11 creatures is planned for a future update.</div></details><details><summary>How do I edit or delete a routine?</summary><div class="faq-body">Tap any routine card on the Home screen to open the edit view. You can update any detail or tap Delete to remove it. Deleting a routine also cancels its scheduled alarm.</div></details></div></div><footer>
-  <div class="footer-logo"><span style="color:var(--teal)">NALKUDIL</span> <span style="color:var(--gold)">STUDIO</span></div>
-  <div class="footer-links">
-    <a href="https://nalkudilstudio.github.io">← Studio Home</a>
-    <a href="https://nalkudilstudio.github.io/rouutine-docs/privacy-policy">Privacy Policy</a>
-    <a href="mailto:nalkudilstudio@gmail.com">Contact</a>
-    <a href="https://www.youtube.com/@nalkudil" target="_blank">YouTube</a>
-    <a href="https://www.instagram.com/nalkudil/" target="_blank">Instagram</a>
-    <a href="https://github.com/nalkudilstudio" target="_blank">GitHub</a>
-  </div>
-  <p class="footer-copy">© 2026 <a href="https://nalkudilstudio.github.io" style="color:var(--teal);text-decoration:none;">Nalkudil Studio</a>. Made with 💚 in Chennai, India.</p>
-</footer></body></html>
+
+  <hr class="divider"/>
+
+  <!-- GETTING STARTED — 3 STEPS -->
+  <section class="section" id="steps">
+    <p class="section-label">Getting Started</p>
+    <h2>Up &amp; Running in 3 Steps</h2>
+    <p class="section-sub">A seamless 60-second setup to bring your day to life with friendly creature companions.</p>
+
+    <div class="steps">
+
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">👤</div>
+        <h3>Personalize Your Experience</h3>
+        <p>A 3-step onboarding sets up your personal Rouutine experience — fast and private.</p>
+        <ul>
+          <li>Enter your first name — creatures greet and nudge you personally</li>
+          <li>Pick a Nudge Tone: 🌸 Gentle, ⚡ Energetic, or 🤣 Funny</li>
+          <li>Gentle is calm and warm. Energetic inspires action. Funny makes you smile</li>
+          <li>You can switch your tone anytime in Settings</li>
+          <li>Allow notification and exact alarm permissions for timely nudges</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">🐾</div>
+        <h3>Build Your Daily Routines</h3>
+        <p>Add routines for any part of your day — morning, afternoon, focus blocks, or evening wind-down.</p>
+        <ul>
+          <li>Tap the + button on the Home screen</li>
+          <li>Give your routine a title (e.g. 'Morning Walk', 'Deep Focus', 'Wind Down')</li>
+          <li>Set a scheduled time and pick repeating days of the week</li>
+          <li>Choose a creature companion — each has a unique theme and default energy</li>
+          <li>Save — your routines arrange chronologically on the Home timeline</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">🔔</div>
+        <h3>Get Nudged &amp; Build Streaks</h3>
+        <p>At the scheduled time, your creature sends a warm prompt. Complete or snooze — consistency counts.</p>
+        <ul>
+          <li>A delightful notification arrives right on schedule</li>
+          <li>Tap to open the rich Moment screen with full creature art</li>
+          <li>Tap Done — confetti animates, sound chimes, and streak advances 🔥</li>
+          <li>Tap Snooze if you need a gentle reminder a few minutes later</li>
+          <li>Track your streaks and unlock milestone badges in the Progress tab</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- FEATURE QUICK GUIDE — 7 FEATURES -->
+  <section class="section" id="features">
+    <p class="section-label">Feature Guide</p>
+    <h2>Know Your Tools &amp; Companions</h2>
+    <p class="section-sub">Seven pillars designed to replace stress and nagging with warmth, playfulness, and unbreakable daily consistency.</p>
+
+    <div class="features-grid">
+
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🐾</div>
+          <div>
+            <div class="feature-name">11 Creature Companions</div>
+            <div class="feature-tag">Companions</div>
+          </div>
+        </div>
+        <p>Each creature brings a distinct personality, signature accent color, and purpose to your day.</p>
+        <ul>
+          <li>☀️ Sunny — Morning Wake Up &amp; Sunrise energy</li>
+          <li>🫧 Bubbles — Morning Hygiene &amp; Self-care</li>
+          <li>🍞 Crumble — Breakfast &amp; Nourishment</li>
+          <li>📚 Pagey — Study, Reading &amp; Deep Focus</li>
+          <li>⚡ Bolt — Exercise, Movement &amp; Stamina</li>
+          <li>🌙 Luna — Evening Reflection &amp; Peaceful Sleep</li>
+        </ul>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🔔</div>
+          <div>
+            <div class="feature-name">3 Nudge Tones (99 Messages)</div>
+            <div class="feature-tag">Personality</div>
+          </div>
+        </div>
+        <p>Shape how your companion talks to you. No annoying alarms — just words that match how you want to be encouraged.</p>
+        <ul>
+          <li>🌸 Gentle: Soft, mindful, calm and reassuring</li>
+          <li>⚡ Energetic: Direct, dynamic, and action-oriented</li>
+          <li>🤣 Funny: Witty, cheerful, and playfully sarcastic</li>
+          <li>99 hand-crafted nudge messages across all companions</li>
+        </ul>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🔥</div>
+          <div>
+            <div class="feature-name">Dynamic Streak Engine</div>
+            <div class="feature-tag">Motivation</div>
+          </div>
+        </div>
+        <p>Celebrate showing up every single day. Streaks create visual momentum that turns actions into permanent habits.</p>
+        <ul>
+          <li>Prominent streak counter on the main Home dashboard</li>
+          <li>Animated streak progress bar advances with every completed routine</li>
+          <li>Creature reactions and celebrations evolve as your streak climbs</li>
+          <li>Designed to motivate without punishing inevitable busy days</li>
+        </ul>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🏅</div>
+          <div>
+            <div class="feature-name">Milestone Badges</div>
+            <div class="feature-tag">Achievements</div>
+          </div>
+        </div>
+        <p>Earn tangible achievement badges as you build consistency across days, weeks, and months.</p>
+        <ul>
+          <li>🌱 Seedling — Complete your very first week of routines</li>
+          <li>⚔️ Week Warrior — 7 consecutive days of routine completions</li>
+          <li>🏆 Month Master — 30 days of steadfast consistency</li>
+          <li>Showcased in your personal Progress &amp; Trophy cabinet</li>
+        </ul>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🏗️</div>
+          <div>
+            <div class="feature-name">Precision Routine Builder</div>
+            <div class="feature-tag">Workflow</div>
+          </div>
+        </div>
+        <p>Total flexibility over your schedule. Build custom morning stacks, workout rhythms, or study routines.</p>
+        <ul>
+          <li>Set custom titles, target time, and multi-day repeat rules</li>
+          <li>Pair any creature companion with any custom routine</li>
+          <li>Chronologically ordered cards for quick daily scanning</li>
+          <li>Tap to edit time, toggle active state, or re-assign creature</li>
+        </ul>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">📴</div>
+          <div>
+            <div class="feature-name">100% On-Device &amp; Private</div>
+            <div class="feature-tag">Privacy</div>
+          </div>
+        </div>
+        <p>Rouutine functions completely offline. No accounts required, no analytics trackers, and zero cloud leaks.</p>
+        <ul>
+          <li>Zero internet permission requested in Android Manifest</li>
+          <li>All routines and progress stored locally in Room SQLite database</li>
+          <li>Notifications scheduled on-device using Android AlarmManager</li>
+          <li>Your personal habits and daily routines remain strictly private</li>
+        </ul>
+      </div>
+
+      <!-- Feature 7 -->
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-emoji">🎉</div>
+          <div>
+            <div class="feature-name">Moment Celebration Screen</div>
+            <div class="feature-tag">Experience</div>
+          </div>
+        </div>
+        <p>Completing a habit should feel rewarding. Every tap on a nudge launches a tactile moment of accomplishment.</p>
+        <ul>
+          <li>Full-screen celebration with companion creature animation</li>
+          <li>Confetti burst and uplifting sound feedback on completion</li>
+          <li>One-tap snooze with automatic gentle reminder</li>
+          <li>Clean transition straight back to your daily timeline</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- FAQ — 6 QUESTIONS -->
+  <section class="section" id="faq">
+    <p class="section-label">FAQ</p>
+    <h2>Common Questions</h2>
+    <p class="section-sub">Answers to everything you need to know about using Rouutine.</p>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">Does Rouutine need an internet connection?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">No — Rouutine is 100% offline. All routine schedules, streaks, companion artwork, and nudge messages work completely without internet. Notifications are scheduled directly on your phone using Android's local AlarmManager.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">Will notifications arrive if my phone is restarted?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">Yes. Rouutine registers a boot receiver that automatically reschedules all your active routine alarms as soon as your phone finishes turning on. Please ensure notification and exact alarm permissions remain enabled in your Android system settings.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">Can I change my companion creature or nudge tone later?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">Yes. You can switch your global nudge tone (🌸 Gentle, ⚡ Energetic, 🤣 Funny) anytime in Settings. You can also edit any routine by tapping its card on the Home screen to change its creature companion, scheduled time, or repeating days.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">What happens if I miss a scheduled routine?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">If a scheduled routine is not completed before midnight, the streak for that routine pauses. You can complete it manually the following morning, but daily consistency is what powers streak increments. Our creatures never scold or nag you — they warmly cheer you on to start fresh.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">How is my data stored and backed up?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">All your data is kept locally in an encrypted Room SQLite database on your device. In accordance with Google Play security compliance, device cloud backup rules protect your settings while keeping local database files strictly private to your phone.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">Are there ads, subscriptions, or paywalls?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-a">Rouutine provides an ad-free, clutter-free experience. The core version supports up to 5 routine slots with creature companions, streak tracking, and full offline privacy. Any future pro tier will be an optional one-time purchase without recurring subscriptions.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CO-CREATE CTA -->
+  <section class="section" id="cocreate" style="padding-bottom: 0;">
+    <div class="cocreate">
+      <p class="cocreate-label">Co-Create the Future</p>
+      <h2>Shape What We Build Next 💡</h2>
+      <p>Rouutine is built <em>with</em> our community. Have an idea for a new creature companion, a habit workflow, or a nudge tone? We want to hear it — and we build the best ideas into the app.</p>
+      <div class="cocreate-steps">
+        <div class="cocreate-step"><span>01</span> Open Rouutine</div>
+        <div class="cocreate-step"><span>→</span></div>
+        <div class="cocreate-step"><span>02</span> Go to Settings</div>
+        <div class="cocreate-step"><span>→</span></div>
+        <div class="cocreate-step"><span>03</span> Tap "Co-Create Roadmap"</div>
+        <div class="cocreate-step"><span>→</span></div>
+        <div class="cocreate-step"><span>04</span> Share your idea ✨</div>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:0;">You can also email ideas directly to <a href="mailto:nalkudilstudio@gmail.com" style="color:var(--teal); text-decoration:none;">nalkudilstudio@gmail.com</a>.<br/>Every suggestion is read personally by the Nalkudil Studio design team.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <span style="color:var(--teal)">NALKUDIL</span>
+      <span style="color:var(--gold)"> STUDIO</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://nalkudilstudio.github.io">← Studio Home</a>
+      <a href="https://nalkudilstudio.github.io/rouutine-docs/privacy-policy">Privacy Policy</a>
+      <a href="mailto:nalkudilstudio@gmail.com">Contact</a>
+      <a href="https://www.youtube.com/@nalkudil" target="_blank">YouTube</a>
+      <a href="https://www.instagram.com/nalkudil/" target="_blank">Instagram</a>
+      <a href="https://github.com/nalkudilstudio" target="_blank">GitHub</a>
+    </div>
+    <p class="footer-copy">
+      © 2026 <a href="https://nalkudilstudio.github.io">Nalkudil Studio</a>. Made with 💚 in Chennai, India.
+    </p>
+  </footer>
+
+</body>
+</html>
